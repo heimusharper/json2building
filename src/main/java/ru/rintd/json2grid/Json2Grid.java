@@ -9,6 +9,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import ru.rintd.json2grid.Building.InternLevel;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.vividsolutions.jts.geom.Coordinate;
@@ -162,6 +164,34 @@ public static Polygon xy2Polygon(BuildElement be) {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Возвращает массив элементов [этаж][полигон]
+	 * @param building план
+	 * @return полигоны
+	 */
+	public static Polygon[][] getJts(Building building){
+		
+		InternLevel[] level = building.Level;
+		
+		Polygon[][] geo = new Polygon[level.length][];
+		int i = 0;
+		for (InternLevel internLevel : level) {
+			
+			BuildElement[] buildElement = internLevel.BuildElement;
+			geo[i] = new Polygon[buildElement.length];
+			int j =0;
+			for (BuildElement buildElement2 : buildElement) {
+				Polygon pol = Json2Grid.xy2Polygon(buildElement2);
+				geo[i][j] = pol;
+				j++;
+			}
+			i++;
+			
+		}
+		
+		return geo;
 	}
     
 }
