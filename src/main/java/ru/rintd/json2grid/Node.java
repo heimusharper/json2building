@@ -45,7 +45,7 @@ public class Node {
         this.xy[0] = x;
         this.xy[1] = y;
         this.h = h;
-        this.uid = null;
+        this.uid = ""+this.buildElID.hashCode();
 
     }
 

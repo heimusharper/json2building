@@ -12,7 +12,7 @@ import com.vividsolutions.jts.math.Vector2D;
  * @author mag
  *
  */
-public class BuildElement {
+public class BuildElement implements Cloneable{
 	
 	/**
 	 * Наименование здания.
@@ -207,6 +207,10 @@ public class BuildElement {
 		double d = (b*b) - (4*a*c);
 		//результат
 		return (-b - Math.sqrt(d))/(2*a);
+	}
+	
+	public BuildElement clone() throws CloneNotSupportedException {
+		return (BuildElement) super.clone();
 	}
 	
 }
